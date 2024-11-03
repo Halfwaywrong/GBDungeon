@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1qh64d08hv45"]
+[gd_scene load_steps=10 format=3 uid="uid://b1qh64d08hv45"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/player.gd" id="1_7w753"]
 [ext_resource type="Texture2D" uid="uid://bc474ne04ido6" path="res://Assets/Sprites/elf.png" id="1_vjwdu"]
@@ -97,6 +97,9 @@ _data = {
 "walk_right": SubResource("Animation_xtfp7")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_miwh6"]
+size = Vector2(16, 16)
+
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_7w753")
@@ -110,3 +113,6 @@ vframes = 9
 libraries = {
 "": SubResource("AnimationLibrary_yabc5")
 }
+
+[node name="body" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_miwh6")
