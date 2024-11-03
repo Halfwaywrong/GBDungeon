@@ -1,12 +1,11 @@
 extends CharacterBody2D
 
-
 enum FACING {left, right}
 
-var anim
+@export var speed : int = 80
+@export var curFacing : FACING = FACING.right
 
-var speed = 100
-var curFacing = FACING.right
+var anim
 var inputDirection = Vector2.ZERO
 
 func _ready():
