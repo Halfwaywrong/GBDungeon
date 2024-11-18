@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1dxu8ihr4bj3"]
+[gd_scene load_steps=9 format=3 uid="uid://c1dxu8ihr4bj3"]
 
 [ext_resource type="PackedScene" uid="uid://vo8t356c0130" path="res://Assets/Scenes/walls.tscn" id="1_8dj7l"]
+[ext_resource type="Script" path="res://Assets/Scripts/Rooms/room1.gd" id="1_fc3da"]
 [ext_resource type="PackedScene" uid="uid://b3ywbpkiy7a8b" path="res://Assets/Scenes/floor.tscn" id="2_f1e7q"]
 [ext_resource type="Texture2D" uid="uid://d1bbmrapbjdt7" path="res://Assets/Sprites/Environment/grounds.png" id="3_awpxh"]
 [ext_resource type="PackedScene" uid="uid://b1qh64d08hv45" path="res://Assets/Scenes/player.tscn" id="4_r12ro"]
@@ -206,7 +207,11 @@ texture = ExtResource("3_awpxh")
 [sub_resource type="TileSet" id="TileSet_lij0a"]
 sources/0 = SubResource("TileSetAtlasSource_k335t")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wcpuv"]
+size = Vector2(10, 16)
+
 [node name="Room1" type="Node"]
+script = ExtResource("1_fc3da")
 
 [node name="Walls" parent="." instance=ExtResource("1_8dj7l")]
 layer_0/tile_data = PackedInt32Array(9, 0, 0, 0, 65536, 3, 8, 196608, 0, 7, 196608, 0, 6, 196608, 0, 5, 458752, 0, 4, 393216, 0, 3, 196608, 0, 2, 196608, 0, 1, 196608, 0, 65545, 196608, 2, 131081, 196608, 2, 196617, 851968, 0, 262153, 851968, 1, 327689, 851968, 2, 393225, 393216, 1, 458761, 196608, 2, 524297, 196608, 3, 524288, 0, 2, 524289, 65536, 2, 524290, 458752, 3, 524291, 65536, 2, 524292, 65536, 2, 524293, 65536, 2, 524294, 65536, 2, 524295, 393216, 3, 524296, 65536, 2, 65536, 65536, 0, 131072, 393216, 2, 196608, 65536, 0, 262144, 65536, 0, 327680, 65536, 0, 393216, 65536, 0, 458752, 65536, 0)
@@ -216,4 +221,13 @@ tile_set = SubResource("TileSet_lij0a")
 layer_0/tile_data = PackedInt32Array(65544, 720896, 0, 65543, 655360, 0, 65542, 655360, 0, 65541, 655360, 0, 65540, 655360, 0, 65539, 655360, 0, 65538, 655360, 0, 65537, 524288, 12, 131073, 524288, 1, 131074, 589824, 2, 196610, 589824, 2, 196611, 589824, 2, 196612, 589824, 2, 196613, 589824, 2, 196614, 589824, 2, 131078, 786432, 12, 131079, 589824, 2, 131080, 720896, 2, 196616, 720896, 2, 196615, 589824, 2, 131076, 589824, 2, 131075, 589824, 2, 131077, 589824, 2, 196609, 524288, 1, 262145, 524288, 1, 327681, 524288, 1, 393217, 524288, 1, 458753, 524288, 3, 458754, 589824, 3, 458755, 589824, 3, 458756, 589824, 15, 458757, 589824, 3, 458758, 589824, 3, 458759, 589824, 3, 458760, 720896, 3, 393224, 720896, 2, 327688, 720896, 2, 327687, 589824, 2, 262151, 589824, 2, 262150, 589824, 2, 262149, 589824, 2, 262148, 589824, 2, 262147, 589824, 2, 262146, 589824, 2, 327682, 589824, 2, 393218, 589824, 2, 393219, 589824, 2, 393220, 589824, 2, 393221, 589824, 2, 327686, 589824, 2, 262152, 720896, 1, 393223, 589824, 2, 393222, 786432, 12, 327685, 589824, 2, 327684, 589824, 2, 327683, 786432, 12)
 
 [node name="Player" parent="." instance=ExtResource("4_r12ro")]
-position = Vector2(58, 55)
+position = Vector2(138, 72)
+curFacing = 0
+
+[node name="Door" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2(155, 72)
+shape = SubResource("RectangleShape2D_wcpuv")
+
+[connection signal="body_entered" from="Door" to="." method="_on_door_body_entered"]
